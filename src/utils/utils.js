@@ -1,4 +1,5 @@
 import moment from "moment";
+import weatherIcons from "../weather-icons.js";
 
 export const getLatitudeAndLongitude = () => {
   return new Promise((resolve, reject) => {
@@ -46,3 +47,11 @@ export const isThereValidDataInLocalStorage = function () {
       .asMinutes() < 5
   );
 };
+
+export const getImageByWeather = (weatherIcon) => {
+  const result = weatherIcons.filter((icon) => weatherIcon === icon.icon);
+  return result[0].data.icon_url;
+};
+
+export const firstUppercase = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);

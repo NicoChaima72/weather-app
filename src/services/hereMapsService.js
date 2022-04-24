@@ -15,9 +15,7 @@ const getCityByLatAndLon = async (latitude, longitude) => {
     import.meta.env.VITE_APP_HERE_API_KEY
   }`;
 
-  // const url = `https://revgeocode.search.hereapi.com/v1/revgeocode?at=-33.455582%2C-71.656638&lang=es&apikey=${
-  //   import.meta.env.VITE_APP_HERE_API_KEY
-  // }`;
+  console.log(url);
 
   const data = await axios.get(url);
   const city = data.data.items[0].address;

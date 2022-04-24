@@ -98,7 +98,6 @@ export default [
       background: "",
     },
   },
-  // TODO: FALTA
   {
     icon: "10n",
     data: {
