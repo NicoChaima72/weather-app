@@ -107,7 +107,7 @@ const StatsWeather = ({ weather }) => {
       <section className="mt-10 mb-10">
         <h3 className="text-xl font-medium text-gray-700">Dias</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-2 mt-1">
-          {weather.daily.map((card) => (
+          {weather.daily.map((card, index) => (
             <div
               key={card.dt}
               className="bg-white border border-gray-100 shadow-sm rounded-md p-4 flex justify-between items-center "
@@ -120,7 +120,11 @@ const StatsWeather = ({ weather }) => {
                 />
                 <div>
                   <p className="text-lg font-medium">
-                    {firstUppercase(moment(card.dt * 1000).format("dddd"))}
+                    {index < 2
+                      ? index === 0
+                        ? "Hoy"
+                        : "Mañana"
+                      : firstUppercase(moment(card.dt * 1000).format("dddd"))}
                   </p>
                   <p className="text-sm text-gray-400">
                     {firstUppercase(card.weather[0].description)}
