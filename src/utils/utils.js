@@ -1,18 +1,30 @@
 import moment from "moment";
 import weatherIcons from "../weather-icons.js";
 
+const defaultLatAndLong = {
+  latitude: "-33.4333",
+  longitude: "-70.6083",
+  isGeolocation: false,
+};
+
 export const getLatitudeAndLongitude = () => {
   return new Promise((resolve, reject) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        if (!position)
-          resolve({ latitude: "-33.4209", longitude: "-70.72596" });
+    if (!navigator.geolocation) resolve(defaultLatAndLong);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        if (!position) resolve(defaultLatAndLong);
+
         resolve({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
+          isGeolocation: true,
         });
-      });
-    } else resolve({ latitude: "-33.4209", longitude: "-70.72596" });
+      },
+      (error) => {
+        resolve(defaultLatAndLong);
+      }
+    );
   });
 };
 

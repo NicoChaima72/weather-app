@@ -64,7 +64,7 @@ const MainPage = () => {
     };
 
     getInfo();
-  }, []);
+  }, [params]);
 
   const searchingByCurrentLocation = () => !params.id;
   const getBackgroundColorByWeather = (weatherIcon, secondary = false) => {
@@ -110,7 +110,6 @@ const MainPage = () => {
         {!loading && !searchingByCurrentLocation() && (
           <div className="flex justify-center items-end mt-4">
             <Link to="/">
-              {/* FIXME: Al presionar el boton no se actualiza, ver proyecto de Fernando Herrera */}
               <button
                 className="text-center p-2 rounded shadow"
                 style={{
