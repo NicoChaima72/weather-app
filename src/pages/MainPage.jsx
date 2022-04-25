@@ -9,6 +9,7 @@ import {
   saveDataInLocalStorage,
   getDataOfLocalStorage,
   isThereValidDataInLocalStorage,
+  clearCityString,
 } from "../utils/utils.js";
 import HereService from "../services/hereMapsService.js";
 import WeatherService from "../services/openWeatherMapService.js";
@@ -92,7 +93,7 @@ const MainPage = () => {
               <div className="flex items-center text-sm">
                 <RoomIcon></RoomIcon>
                 <p id="city-name" className="ml-2">
-                  {loading ? "Buscando..." : city}
+                  {loading ? "Buscando..." : clearCityString(city)}
                 </p>
               </div>
               <Link to="/search">

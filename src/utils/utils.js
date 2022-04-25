@@ -65,3 +65,6 @@ export const getImageByWeather = (weatherIcon) => {
 
 export const firstUppercase = (string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
+
+export const clearCityString = (cityString) =>
+  cityString.replace("Región Metropolitana de Santiago", "RM");
