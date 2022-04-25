@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { firstUppercase, getImageByWeather } from "../utils/utils";
 import moment from "moment";
-import "moment/locale/es";
-moment.locale("es");
+import { firstUppercase, getImageByWeather } from "../utils/utils";
 
 const CurrentWeather = ({ weather }) => {
   return (
@@ -17,15 +15,17 @@ const CurrentWeather = ({ weather }) => {
           alt=""
         />
         <h3 className="ml-4 text-6xl font-semibold">
-          <span id="weather-temp">{Math.round(weather.current.temp)}</span>°C
+          <span id="weather-temp">
+            {Math.round(weather.current.feels_like)}
+          </span>
+          °C
         </h3>
       </div>
-      <h4 className="text-center text-xl mt-3" id="weather-description">
+      <h4 className="text-center text-xl mt-3">
         {firstUppercase(weather.current.weather[0].description)}
       </h4>
-      <h5 className="text-center font-semibold text-sm mt-3" id="weather-date">
-        {/* TODO: Pasar el dia a dinamico */}
-        {moment().format("dddd, MMM D, YYYY")}
+      <h5 className="text-center font-semibold text-sm mt-3">
+        {firstUppercase(moment().format("dddd, MMM D, YYYY"))}
       </h5>
       <h6 className="text-center" id="weather-hour" />
       <div className="flex justify-center items-center space-x-4 mt-6">

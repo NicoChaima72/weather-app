@@ -17,6 +17,7 @@ import SkeletonStatsWeather from "../components/skeleton/SkeletonStatsWeather.js
 import weatherIcons from "../weather-icons.js";
 import CurrentWeather from "../components/CurrentWeather.jsx";
 import StatsWeather from "../components/StatsWeather.jsx";
+import moment from "moment";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(true);
@@ -56,8 +57,9 @@ const MainPage = () => {
       id="weather-backround-color"
       style={{
         backgroundColor: loading
-          ? // TODO: Verificar por hora de cliente y dar color variable
-            "#48a8fa"
+          ? moment().format("H") > 7 && moment().format("H") < 19
+            ? "#48a8fa"
+            : "#023656"
           : getBackgroundColorByWeather(weather.current.weather[0].icon),
       }}
     >

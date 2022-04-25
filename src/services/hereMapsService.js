@@ -15,8 +15,6 @@ const getCityByLatAndLon = async (latitude, longitude) => {
     import.meta.env.VITE_APP_HERE_API_KEY
   }`;
 
-  console.log(url);
-
   const data = await axios.get(url);
   const city = data.data.items[0].address;
   return city.state + ", " + city.countryName;

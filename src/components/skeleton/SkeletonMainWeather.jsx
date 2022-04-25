@@ -1,5 +1,6 @@
 import { Skeleton } from "@mui/material";
 import React from "react";
+import moment from "moment";
 
 const SkeletonMainWeather = () => {
   return (
@@ -22,7 +23,7 @@ const SkeletonMainWeather = () => {
       </div>
       <div className="">
         <h5 className="text-center font-semibold text-sm mt-3">
-          Sabado, Oct 9, 2021
+          {moment().format("dddd, MMM D, YYYY")}
         </h5>
       </div>
       <div className="mt-4">

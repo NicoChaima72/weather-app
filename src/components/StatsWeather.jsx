@@ -120,7 +120,7 @@ const StatsWeather = ({ weather }) => {
                 />
                 <div>
                   <p className="text-lg font-medium">
-                    {moment(card.dt * 1000).format("dddd")}
+                    {firstUppercase(moment(card.dt * 1000).format("dddd"))}
                   </p>
                   <p className="text-sm text-gray-400">
                     {firstUppercase(card.weather[0].description)}

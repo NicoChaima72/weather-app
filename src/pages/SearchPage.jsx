@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useHistory } from "react-router-dom";
 import HereService from "../services/hereMapsService.js";
+import { Link } from "react-router-dom";
 
 const SearchPage = () => {
   const history = useHistory();
@@ -54,11 +55,13 @@ const SearchPage = () => {
               className="m-0 py-3 px-3 cursor-pointer hover:bg-blue-50 leading-tight"
               key={result.id}
             >
-              <p>{result.address.label}</p>
-              <span className="text-xs text-gray-500">
-                {result.address.countryName}, {result.address.state},{" "}
-                {result.address.county}
-              </span>
+              <Link to="/">
+                <p>{result.address.label}</p>
+                <span className="text-xs text-gray-500">
+                  {result.address.countryName}, {result.address.state},{" "}
+                  {result.address.county}
+                </span>
+              </Link>
             </div>
           ))}
         </div>

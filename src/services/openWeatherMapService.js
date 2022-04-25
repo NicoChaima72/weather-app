@@ -24,7 +24,6 @@ const getWeather = async (latitude, longitude) => {
   ]);
 
   oneCall.current["main"] = current.main;
-  console.log({ oneCall, current });
   return oneCall;
 };
 
