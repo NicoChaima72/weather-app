@@ -16,11 +16,17 @@ export const getLatitudeAndLongitude = () => {
   });
 };
 
-export const saveDataInLocalStorage = function (latitude, longitude, cityName) {
+export const saveDataInLocalStorage = function (
+  latitude,
+  longitude,
+  cityName,
+  weather
+) {
   localStorage.setItem("last-time", new Date().toString());
   localStorage.setItem("cityName", cityName);
   localStorage.setItem("latitude", latitude);
   localStorage.setItem("longitude", longitude);
+  localStorage.setItem("weather", JSON.stringify(weather));
 };
 
 export const getDataOfLocalStorage = function () {
@@ -28,6 +34,7 @@ export const getDataOfLocalStorage = function () {
     localStorage.getItem("latitude"),
     localStorage.getItem("longitude"),
     localStorage.getItem("cityName"),
+    JSON.parse(localStorage.getItem("weather")),
   ];
 };
 
@@ -37,6 +44,7 @@ export const isThereValidDataInLocalStorage = function () {
     localStorage.getItem("cityName") &&
     localStorage.getItem("latitude") &&
     localStorage.getItem("longitude") &&
+    localStorage.getItem("weather") &&
     // Si el tiempo actual no es mayor a 5 min guardado en local
     moment
       .duration(
@@ -44,7 +52,9 @@ export const isThereValidDataInLocalStorage = function () {
           moment(Date.parse(localStorage.getItem("last-time")))
         )
       )
-      .asMinutes() < 5
+      .asMinutes() < 3 &&
+    moment().format("D") ===
+      moment(Date.parse(localStorage.getItem("last-time"))).format("D")
   );
 };
 

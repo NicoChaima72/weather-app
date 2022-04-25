@@ -18,37 +18,59 @@ import weatherIcons from "../weather-icons.js";
 import CurrentWeather from "../components/CurrentWeather.jsx";
 import StatsWeather from "../components/StatsWeather.jsx";
 import moment from "moment";
+import { useParams } from "react-router-dom";
 
 const MainPage = () => {
   const [loading, setLoading] = useState(true);
   const [city, setCity] = useState({});
   const [weather, setWeather] = useState({});
+  const params = useParams();
 
   useEffect(() => {
+    const getWeather = async (latitude, longitude) => {
+      const weatherCity = await WeatherService.getWeather(latitude, longitude);
+      return weatherCity;
+    };
+
     const getInfo = async () => {
       setLoading(true);
-      let [latitude, longitude, cityName] = ["", "", ""];
-      if (isThereValidDataInLocalStorage()) {
-        [latitude, longitude, cityName] = getDataOfLocalStorage();
+      let [latitude, longitude, cityName, newWeather] = ["", "", ""];
+      if (isThereValidDataInLocalStorage() && searchingByCurrentLocation()) {
+        [latitude, longitude, cityName, newWeather] = getDataOfLocalStorage();
+        setCity(cityName);
+        setWeather(newWeather);
       } else {
-        // TODO: Agregar el tiempo a localStorage
-        ({ latitude, longitude } = await getLatitudeAndLongitude());
-        cityName = await HereService.getCityByLatAndLon(latitude, longitude);
-        saveDataInLocalStorage(latitude, longitude, cityName);
+        if (searchingByCurrentLocation()) {
+          ({ latitude, longitude } = await getLatitudeAndLongitude());
+          cityName = await HereService.getCityByLatAndLon(latitude, longitude);
+          setCity(cityName);
+          newWeather = await getWeather(latitude, longitude);
+          saveDataInLocalStorage(latitude, longitude, cityName, newWeather);
+        } else {
+          // searching by other city
+          const { address, position } = await HereService.getCityByHereId(
+            params.id
+          );
+          cityName = `${address.city}, ${address.state}, ${address.countryName}`;
+          ({ lat: latitude, lng: longitude } = position);
+          setCity(cityName);
+          newWeather = await getWeather(latitude, longitude);
+        }
+        setWeather(newWeather);
       }
 
-      setCity(cityName);
-      const weatherCity = await WeatherService.getWeather(latitude, longitude);
-      setWeather(weatherCity);
       setLoading(false);
     };
 
     getInfo();
   }, []);
 
-  const getBackgroundColorByWeather = (weatherIcon) => {
+  const searchingByCurrentLocation = () => !params.id;
+  const getBackgroundColorByWeather = (weatherIcon, secondary = false) => {
     const result = weatherIcons.filter((icon) => weatherIcon === icon.icon);
-    return result[0].data.background_color;
+    return !secondary
+      ? result[0].data.background_color
+      : result[0].data.background_color_secondary;
   };
 
   return (
@@ -84,6 +106,24 @@ const MainPage = () => {
             )}
           </div>
         </div>
+        {!loading && !searchingByCurrentLocation() && (
+          <div className="flex justify-center items-end mt-4">
+            <Link to="/">
+              {/* FIXME: Al presionar el boton no se actualiza, ver proyecto de Fernando Herrera */}
+              <button
+                className="text-center p-2 rounded shadow"
+                style={{
+                  backgroundColor: getBackgroundColorByWeather(
+                    weather.current.weather[0].icon,
+                    true
+                  ),
+                }}
+              >
+                Utilizar mi ubicacion actual
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
       <article className="container ">
         {loading ? (

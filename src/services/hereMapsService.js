@@ -17,7 +17,15 @@ const getCityByLatAndLon = async (latitude, longitude) => {
 
   const data = await axios.get(url);
   const city = data.data.items[0].address;
-  return city.state + ", " + city.countryName;
+  return `${city.city}, ${city.state}, ${city.countryName}`;
 };
 
-export default { autocompleteCity, getCityByLatAndLon };
+const getCityByHereId = async (id) => {
+  const url = `https://lookup.search.hereapi.com/v1/lookup?id=here:cm:namedplace:${id}&lang=es&apiKey=${
+    import.meta.env.VITE_APP_HERE_API_KEY
+  }`;
+  const { data } = await axios.get(url);
+  return data;
+};
+
+export default { autocompleteCity, getCityByLatAndLon, getCityByHereId };

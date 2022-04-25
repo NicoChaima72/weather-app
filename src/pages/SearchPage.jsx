@@ -22,6 +22,8 @@ const SearchPage = () => {
     setIsValid(true);
   };
 
+  const normalizeId = (id) => id.substring(id.lastIndexOf(":") + 1);
+
   return (
     <div className="container mt-5">
       <div onClick={() => history.goBack()}>
@@ -51,18 +53,15 @@ const SearchPage = () => {
           className="py-1 border bg-white border-gray-200 rounded-lg mt-3 divide-y max-h-64 overflow-y-auto w-[95%] mx-auto"
         >
           {results.map((result) => (
-            <div
-              className="m-0 py-3 px-3 cursor-pointer hover:bg-blue-50 leading-tight"
-              key={result.id}
-            >
-              <Link to="/">
+            <Link to={`/place/${normalizeId(result.id)}`} key={result.id}>
+              <div className="m-0 py-3 px-3 hover:bg-blue-50 leading-tight">
                 <p>{result.address.label}</p>
                 <span className="text-xs text-gray-500">
                   {result.address.countryName}, {result.address.state},{" "}
                   {result.address.county}
                 </span>
-              </Link>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       )}
