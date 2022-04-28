@@ -126,12 +126,12 @@ const StatsWeather = ({ weather }) => {
                         : "Mañana"
                       : firstUppercase(moment(card.dt * 1000).format("dddd"))}
                   </p>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-gray-400 flex-shrink">
                     {firstUppercase(card.weather[0].description)}
                   </p>
                 </div>
               </div>
-              <div>
+              <div className="shrink-0">
                 <p className="text-lg">
                   {Math.round(card.temp.min)}° /{" "}
                   <span className="font-medium">
