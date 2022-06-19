@@ -10,7 +10,6 @@ const StatsWeather = ({ weather }) => {
         <div className="flex space-x-1 pb-2 mt-1" style={{ overflowX: "auto" }}>
           {weather.hourly.map(
             (card, index) =>
-              index % 2 === 0 &&
               index < 23 && (
                 <div
                   key={card.dt}
