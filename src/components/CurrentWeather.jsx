@@ -13,6 +13,7 @@ const CurrentWeather = ({ weather }) => {
           id="weather-icon"
           src={getImageByWeather(weather.current.weather[0].icon)}
           alt=""
+          loading="lazy"
         />
         <h3 className="ml-4 text-6xl font-semibold">
           <span id="weather-temp">

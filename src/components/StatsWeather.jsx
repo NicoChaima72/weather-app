@@ -19,6 +19,7 @@ const StatsWeather = ({ weather }) => {
                     className="w-14"
                     src={getImageByWeather(card.weather[0].icon)}
                     alt=""
+                    loading="lazy"
                   />
                   <p className="mt-1 font-medium">{Math.round(card.temp)}°</p>
                   <p className="text-xs text-gray-400">
@@ -38,6 +39,7 @@ const StatsWeather = ({ weather }) => {
                 className="w-10"
                 src="https://cdn-icons-png.flaticon.com/512/627/627118.png"
                 alt=""
+                loading="lazy"
               />
             </div>
             <div className="leading-4">
@@ -56,6 +58,7 @@ const StatsWeather = ({ weather }) => {
                 className="w-10"
                 src="https://cdn-icons-png.flaticon.com/512/3314/3314011.png"
                 alt=""
+                loading="lazy"
               />
             </div>
             <div className="leading-4">
@@ -74,6 +77,7 @@ const StatsWeather = ({ weather }) => {
                 className="w-10"
                 src="https://cdn-icons-png.flaticon.com/512/362/362382.png"
                 alt=""
+                loading="lazy"
               />
             </div>
             <div className="leading-4">
@@ -92,6 +96,7 @@ const StatsWeather = ({ weather }) => {
                 className="w-10"
                 src="https://cdn-icons-png.flaticon.com/512/2917/2917242.png"
                 alt=""
+                loading="lazy"
               />
             </div>
             <div className="leading-4">
@@ -116,6 +121,7 @@ const StatsWeather = ({ weather }) => {
                   className="w-14"
                   src={getImageByWeather(card.weather[0].icon)}
                   alt=""
+                  loading="lazy"
                 />
                 <div>
                   <p className="text-lg font-medium">
